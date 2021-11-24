@@ -1,10 +1,11 @@
 import React, {Component} from "react";
 import axios from "axios";
 import Main from "../template/Main";
+import CustomerForm from "./CustomerForm";
 
 const headerProps = {
     icon: 'users',
-    title: 'Usuários',
+    title: 'Clientes',
     subtitle: 'Cadastro de usuários: Incluir, Listar, Alterar e Excluir!'
 }
 
@@ -14,7 +15,7 @@ const initialState = {
     list: []
 }
 
-export default class UserCrud extends Component {
+export default class CustomersCrud extends Component {
 
     state = { ...initialState }
 
@@ -45,7 +46,7 @@ export default class UserCrud extends Component {
         return list;
     }
 
-    updateField(event) {
+    updateField = event => {
         const user = {...this.state.user};
         user[event.target.name] = event.target.value;
         this.setState({ user });
@@ -60,51 +61,6 @@ export default class UserCrud extends Component {
             const list = this.state.list.filter(u => u !== user);
             this.setState({ list });
         })
-    }
-
-    renderForm() { /* refatorar */
-        return (
-            <div className="form">
-                <div className="row">
-                    <div className="col-12 col-md-6">
-                        <div className="form-group">
-                            <label>Nome</label>
-                            <input type="text" className="form-control"
-                                name="name"
-                                value={this.state.user.name}
-                                onChange={e => this.updateField(e)}
-                                placeholder="Digite o nome..." />
-                        </div>
-                    </div>
-
-                    <div className="col-12 col-md-6">
-                        <div className="form-group">
-                            <label>E-mail</label>
-                            <input type="text" className="form-control"
-                                name="email"
-                                value={this.state.user.email}
-                                onChange={e => this.updateField(e)}
-                                placeholder="Digite o e-mail..." />
-                        </div>
-                    </div>
-                </div>
-
-                <hr />
-                <div className="row">
-                    <div className="col-12 d-flex justify-content-end">
-                        <button className="btn btn-primary"
-                            onClick={e => this.save(e)}>
-                            Salvar
-                        </button>
-
-                        <button className="btn btn-secondary ml-2"
-                            onClick={e => this.clear(e)}>
-                            Cancelar
-                        </button>
-                    </div>
-                </div>
-            </div>
-        )
     }
 
     renderTable() { /* refatorar */
@@ -125,7 +81,7 @@ export default class UserCrud extends Component {
         )
     }
 
-    renderRows() {
+    renderRows() { /* refatorar */
         return this.state.list.map(user => {
             return (
                 <tr key={user.id}>
@@ -151,10 +107,22 @@ export default class UserCrud extends Component {
 
     render() {
         return (
+            <React.Fragment>
             <Main {...headerProps}>
-               {this.renderForm()}
+             <div className="form">
+               <CustomerForm name="name"
+                        value={this.state.user.name}
+                        onChange={e => this.updateField(e)}
+                        placeholder="Digite o nome..."/>
+               
+               <CustomerForm name="email"
+                        value={this.state.user.email}
+                        onChange={e => this.updateField(e)}
+                        placeholder="Digite o email..."/> 
+            </div>
                {this.renderTable()}
             </Main>
+            </React.Fragment>
         )
     }
 }
