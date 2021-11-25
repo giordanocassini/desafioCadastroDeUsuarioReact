@@ -1,8 +1,9 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import axios from "axios";
 import Main from "../template/Main";
 import CustomerForm from "./CustomerForm";
-import FormButtons from "./FormButtons";
+import CustomerTable from "./CustomerTable"
+
 const headerProps = {
     icon: 'users',
     title: 'Clientes',
@@ -26,7 +27,7 @@ export default class CustomersCrud extends Component {
     }
 
     clear() {
-        this.setState({user: initialState.user});
+        this.setState({ user: initialState.user });
     }
 
     save() {
@@ -35,8 +36,8 @@ export default class CustomersCrud extends Component {
         const url = user.id ? `${baseUrl}/${user.id}` : baseUrl;
         axios[method](url, user)
             .then(resp => {
-                const list = this.getUpdatedList (resp.data);
-                this.setState({user: initialState.user, list});
+                const list = this.getUpdatedList(resp.data);
+                this.setState({ user: initialState.user, list });
             })
     }
 
@@ -47,7 +48,7 @@ export default class CustomersCrud extends Component {
     }
 
     updateField = event => {
-        const user = {...this.state.user};
+        const user = { ...this.state.user };
         user[event.target.name] = event.target.value;
         this.setState({ user });
     }
@@ -62,25 +63,7 @@ export default class CustomersCrud extends Component {
             this.setState({ list });
         })
     }
-
-    renderTable() { /* refatorar */
-        return (
-            <table className="table mt-4">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nome</th>
-                        <th>E-mail</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {this.renderRows()}
-                </tbody>
-            </table>
-        )
-    }
-
+   
     renderRows() { /* refatorar */
         return this.state.list.map(user => {
             return (
@@ -103,21 +86,21 @@ export default class CustomersCrud extends Component {
         })
     }
 
-    
+
 
     render() {
         return (
             <React.Fragment>
-            <Main {...headerProps}>
-               <CustomerForm
+                <Main {...headerProps}>
+                    <CustomerForm
                         valueName={this.state.user.name}
                         valueEmail={this.state.user.email}
                         updateField={e => this.updateField(e)}
                         salvar={e => this.save(e)}
                         cancelar={e => this.clear(e)}
-                /> 
-            {this.renderTable()}
-            </Main>
+                    />
+                    <CustomerTable rows={this.renderRows()}/>
+                </Main>
             </React.Fragment>
         )
     }
