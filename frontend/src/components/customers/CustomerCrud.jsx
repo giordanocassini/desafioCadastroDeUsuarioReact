@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import axios from "axios";
 import Main from "../template/Main";
 import CustomerForm from "./CustomerForm";
-
+import FormButtons from "./FormButtons";
 const headerProps = {
     icon: 'users',
     title: 'Clientes',
@@ -109,18 +109,14 @@ export default class CustomersCrud extends Component {
         return (
             <React.Fragment>
             <Main {...headerProps}>
-             <div className="form">
-               <CustomerForm name="name"
-                        value={this.state.user.name}
-                        onChange={e => this.updateField(e)}
-                        placeholder="Digite o nome..."/>
-               
-               <CustomerForm name="email"
-                        value={this.state.user.email}
-                        onChange={e => this.updateField(e)}
-                        placeholder="Digite o email..."/> 
-            </div>
-               {this.renderTable()}
+               <CustomerForm
+                        valueName={this.state.user.name}
+                        valueEmail={this.state.user.email}
+                        updateField={e => this.updateField(e)}
+                        salvar={e => this.save(e)}
+                        cancelar={e => this.cancel(e)}
+                /> 
+            {this.renderTable()}
             </Main>
             </React.Fragment>
         )
