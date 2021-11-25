@@ -114,7 +114,7 @@ export default class CustomersCrud extends Component {
                         valueEmail={this.state.user.email}
                         updateField={e => this.updateField(e)}
                         salvar={e => this.save(e)}
-                        cancelar={e => this.cancel(e)}
+                        cancelar={e => this.clear(e)}
                 /> 
             {this.renderTable()}
             </Main>
