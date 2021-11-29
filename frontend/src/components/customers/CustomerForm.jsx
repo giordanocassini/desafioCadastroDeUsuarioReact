@@ -8,7 +8,7 @@ export default props =>
                     <label>Nome</label>
                     <input type="text" className="form-control"
                         name="name"
-                        value={props.valueName}
+                        value={props.customer.name}
                         onChange={props.updateField}
                         placeholder="Digite o nome..." />
                 </div>
@@ -19,7 +19,7 @@ export default props =>
                     <label>E-mail</label>
                     <input type="text" className="form-control"
                         name="email"
-                        value={props.valueEmail}
+                        value={props.customer.email}
                         onChange={props.updateField}
                         placeholder="Digite o e-mail..." />
                 </div>

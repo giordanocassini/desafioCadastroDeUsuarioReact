@@ -2,17 +2,18 @@ import React, { Component } from "react";
 import axios from "axios";
 import Main from "../template/Main";
 import CustomerForm from "./CustomerForm";
-import CustomerTable from "./CustomerTable"
+import CustomerTable from "./CustomerTable";
+import CustomerAddress from "./CustomerAddress";
 
 const headerProps = {
-    icon: 'users',
+    icon: 'user',
     title: 'Clientes',
     subtitle: 'Cadastro de usuários: Incluir, Listar, Alterar e Excluir!'
 }
 
 const baseUrl = 'http://localhost:3001/users'
 const initialState = {
-    user: { name: '', email: '' },
+    customer: { name: '', email: '', address: [] },
     list: []
 }
 
@@ -27,57 +28,57 @@ export default class CustomersCrud extends Component {
     }
 
     clear() {
-        this.setState({ user: initialState.user });
+        this.setState({ customer: initialState.customer });
     }
 
     save() {
-        const user = this.state.user;
-        const method = user.id ? 'put' : 'post';
-        const url = user.id ? `${baseUrl}/${user.id}` : baseUrl;
-        axios[method](url, user)
+        const customer = this.state.customer;
+        const method = customer.id ? 'put' : 'post';
+        const url = customer.id ? `${baseUrl}/${customer.id}` : baseUrl;
+        axios[method](url, customer)
             .then(resp => {
                 const list = this.getUpdatedList(resp.data);
-                this.setState({ user: initialState.user, list });
+                this.setState({ customer: initialState.customer, list });
             })
     }
 
-    getUpdatedList(user) {
-        const list = this.state.list.filter(u => u.id !== user.id)
-        list.unshift(user);
+    getUpdatedList(customer) {
+        const list = this.state.list.filter(u => u.id !== customer.id)
+        list.unshift(customer);
         return list;
     }
 
     updateField = event => {
-        const user = { ...this.state.user };
-        user[event.target.name] = event.target.value;
-        this.setState({ user });
+        const customer = { ...this.state.customer };
+        customer[event.target.name] = event.target.value;
+        this.setState({ customer });
     }
 
-    load(user) {
-        this.setState({ user });
+    load(customer) {
+        this.setState({ customer });
     }
 
-    remove(user) {
-        axios.delete(`${baseUrl}/${user.id}`).then(resp => { /* o que é resp aqui? */
-            const list = this.state.list.filter(u => u !== user);
+    remove(customer) {
+        axios.delete(`${baseUrl}/${customer.id}`).then(resp => { /* o que é resp aqui? */
+            const list = this.state.list.filter(u => u !== customer);
             this.setState({ list });
         })
     }
    
     renderRows() { /* refatorar */
-        return this.state.list.map(user => {
+        return this.state.list.map(customer => {
             return (
-                <tr key={user.id}>
-                    <td>{user.id}</td>
-                    <td>{user.name}</td>
-                    <td>{user.email}</td>
+                <tr key={customer.id}>
+                    <td>{customer.id}</td>
+                    <td>{customer.name}</td>
+                    <td>{customer.email}</td>
                     <td>
                         <button className="btn btn-warning"
-                            onClick={() => this.load(user)}>
+                            onClick={() => this.load(customer)}>
                             <i className="fa fa-pencil"></i>
                         </button>
                         <button className="btn btn-danger ml-2"
-                            onClick={() => this.remove(user)}>
+                            onClick={() => this.remove(customer)}>
                             <i className="fa fa-trash"></i>
                         </button>
                     </td>
@@ -89,12 +90,12 @@ export default class CustomersCrud extends Component {
 
 
     render() {
+        console.log(this.state.customer);
         return (
             <React.Fragment>
                 <Main {...headerProps}>
                     <CustomerForm
-                        valueName={this.state.user.name}
-                        valueEmail={this.state.user.email}
+                       customer={this.state.customer}
                         updateField={e => this.updateField(e)}
                         salvar={e => this.save(e)}
                         cancelar={e => this.clear(e)}
