@@ -4,6 +4,7 @@ import Main from "../template/Main";
 import CustomerForm from "./CustomerForm";
 import CustomerTable from "./CustomerTable";
 import CustomerAddress from "./CustomerAddress";
+import Address from "./Address";
 
 const headerProps = {
     icon: 'user',
@@ -92,17 +93,15 @@ export default class CustomersCrud extends Component {
     render() {
         console.log(this.state.customer);
         return (
-            <React.Fragment>
                 <Main {...headerProps}>
                     <CustomerForm
-                       customer={this.state.customer}
+                        customer={this.state.customer}
                         updateField={e => this.updateField(e)}
                         salvar={e => this.save(e)}
                         cancelar={e => this.clear(e)}
                     />
                     <CustomerTable rows={this.renderRows()}/>
                 </Main>
-            </React.Fragment>
         )
     }
 }
