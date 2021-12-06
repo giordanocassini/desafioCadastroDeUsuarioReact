@@ -1,5 +1,6 @@
 export default class Address {
-    constructor(estado, cidade, bairro, cep, rua, numero, complemento, obs){
+    constructor(id, estado, cidade, bairro, cep, rua, numero, complemento, obs){
+        this.id = id;
         this.estado = estado;
         this.cidade = cidade;
         this.bairro = bairro;

@@ -2,10 +2,7 @@ import React, { Component } from "react";
 import Address from "./Address";
 
 const initialState = {
-    address: {
-        rua: "",
-        cidade: ""
-    }
+    address: new Address()
 }
 
 export default class CustomerAddress extends Component {
@@ -16,7 +13,7 @@ export default class CustomerAddress extends Component {
         this.clear = this.clear.bind(this);
     };
 
-    state = { ...initialState };
+    state = { address: new Address() };
 
     updateField(event) {
         const address = this.state.address;
@@ -26,13 +23,14 @@ export default class CustomerAddress extends Component {
 
     save() {
         const address = this.state.address;
-        this.props.customer.address.push(address);
-        this.props.salvar;
+        address.id = this.props.customer.addresses.length;
+        this.props.pushAddress(address);
+        this.setState({address: new Address()});
+        console.log(this.state.address);
     }
 
     clear() {
-        this.setState({...initialState});
-        this.props.cancelar;
+        this.setState({address: new Address()});
     }
 
     render() {
@@ -52,7 +50,7 @@ export default class CustomerAddress extends Component {
 
                     <div className="col-12 col-md-6">
                         <div className="form-group">
-                            <label>E-mail</label>
+                            <label>Rua</label>
                             <input type="text" className="form-control"
                                 name="rua"
                                 value={this.state.address.rua}
@@ -62,14 +60,14 @@ export default class CustomerAddress extends Component {
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col-12 d-flex justify-content-end">
+                    <div className="col-12 d-flex">
                         <button className="btn btn-primary"
-                            onClick={this.save}>
+                            onClick={e => this.save(e)}>
                             Salvar
                         </button>
 
                         <button className="btn btn-secondary ml-2"
-                            onClick={this.clear}>
+                            onClick={e => this.clear(e)}>
                             Cancelar
                         </button>
                     </div>

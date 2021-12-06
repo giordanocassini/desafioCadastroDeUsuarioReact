@@ -3,8 +3,7 @@ import axios from "axios";
 import Main from "../template/Main";
 import CustomerForm from "./CustomerForm";
 import CustomerTable from "./CustomerTable";
-import CustomerAddress from "./CustomerAddress";
-import Address from "./Address";
+import Customer from "./Customer";
 
 const headerProps = {
     icon: 'user',
@@ -14,7 +13,7 @@ const headerProps = {
 
 const baseUrl = 'http://localhost:3001/users'
 const initialState = {
-    customer: { name: '', email: '', address: [] },
+    customer: new Customer(),
     list: []
 }
 
@@ -29,7 +28,8 @@ export default class CustomersCrud extends Component {
     }
 
     clear() {
-        this.setState({ customer: initialState.customer });
+        this.setState({ customer: new Customer() });
+        console.log(this.state.customer);
     }
 
     save() {
@@ -39,8 +39,9 @@ export default class CustomersCrud extends Component {
         axios[method](url, customer)
             .then(resp => {
                 const list = this.getUpdatedList(resp.data);
-                this.setState({ customer: initialState.customer, list });
+                this.setState({ customer: new Customer(), list });
             })
+        console.log(this.state.customer);
     }
 
     getUpdatedList(customer) {
@@ -56,6 +57,7 @@ export default class CustomersCrud extends Component {
     }
 
     load(customer) {
+        console.log(this.state.customer);
         this.setState({ customer });
     }
 
@@ -64,6 +66,12 @@ export default class CustomersCrud extends Component {
             const list = this.state.list.filter(u => u !== customer);
             this.setState({ list });
         })
+    }
+
+    pushAddress(address) {
+        const customer = this.state.customer;
+        customer.addresses.push(address);
+        this.setState({ customer });
     }
    
     renderRows() { /* refatorar */
@@ -91,7 +99,6 @@ export default class CustomersCrud extends Component {
 
 
     render() {
-        console.log(this.state.customer);
         return (
                 <Main {...headerProps}>
                     <CustomerForm
@@ -99,6 +106,7 @@ export default class CustomersCrud extends Component {
                         updateField={e => this.updateField(e)}
                         salvar={e => this.save(e)}
                         cancelar={e => this.clear(e)}
+                        pushAddress= {a => this.pushAddress(a)}
                     />
                     <CustomerTable rows={this.renderRows()}/>
                 </Main>
