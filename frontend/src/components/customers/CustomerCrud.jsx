@@ -11,7 +11,7 @@ const headerProps = {
     subtitle: 'Cadastro de usuários: Incluir, Listar, Alterar e Excluir!'
 }
 
-const baseUrl = 'http://localhost:3001/users'
+const baseUrl = 'http://localhost:3001/customers'
 const initialState = {
     customer: new Customer(),
     list: []
@@ -102,7 +102,7 @@ export default class CustomersCrud extends Component {
                         customer={this.state.customer}
                         updateField={e => this.updateField(e)}
                         salvar={e => this.save(e)}
-                        cancelar={e => this.clear(e)}
+                        cancelar={() => this.clear()}
                         pushAddress= {a => this.pushAddress(a)}
                     />
                     <CustomerTable rows={this.renderRows()}/>
