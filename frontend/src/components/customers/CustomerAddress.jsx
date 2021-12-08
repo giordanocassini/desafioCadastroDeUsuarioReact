@@ -1,16 +1,14 @@
 import React, { Component } from "react";
 import Address from "./Address";
 
-const initialState = {
-    address: new Address()
-}
-
 export default class CustomerAddress extends Component {
 
     constructor(props) {
         super(props);
         this.save = this.save.bind(this);
         this.clear = this.clear.bind(this);
+        this.renderAddressSelector = this.renderAddressSelector.bind(this);
+        this.loadAddress = this.loadAddress.bind(this);
     };
 
     state = { address: new Address() };
@@ -23,19 +21,35 @@ export default class CustomerAddress extends Component {
 
     save() {
         const address = this.state.address;
-        address.id = this.props.customer.addresses.length;
+        address.id = this.props.customer.addresses.length + 1;
         this.props.pushAddress(address);
-        this.setState({address: new Address()});
-        console.log(this.state.address);
+        this.setState({ address: new Address() });
     }
 
     clear() {
-        this.setState({address: new Address()});
+        this.setState({ address: new Address() });
+    }
+
+    loadAddress(address) {
+        this.setState({ address });
+    }
+
+    renderAddressSelector() {
+        const addresses = this.props.customer.addresses;
+        console.log(addresses);
+        return addresses.map((a, i) => {
+            return (
+                <button onClick={() => this.loadAddress(a)}type="button" class="btn btn-light btn-small">{i + 1}</button>
+            )
+        });
     }
 
     render() {
         return (
             <div className="form">
+                <div className="btn-group">
+                    {this.renderAddressSelector()}
+                </div>
                 <div className="row">
                     <div className="col-12 col-md-6">
                         <div className="form-group">

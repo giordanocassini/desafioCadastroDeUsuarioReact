@@ -29,7 +29,6 @@ export default class CustomersCrud extends Component {
 
     clear() {
         this.setState({ customer: new Customer() });
-        console.log(this.state.customer);
     }
 
     save() {
@@ -41,7 +40,6 @@ export default class CustomersCrud extends Component {
                 const list = this.getUpdatedList(resp.data);
                 this.setState({ customer: new Customer(), list });
             })
-        console.log(this.state.customer);
     }
 
     getUpdatedList(customer) {
@@ -57,7 +55,6 @@ export default class CustomersCrud extends Component {
     }
 
     load(customer) {
-        console.log(this.state.customer);
         this.setState({ customer });
     }
 
