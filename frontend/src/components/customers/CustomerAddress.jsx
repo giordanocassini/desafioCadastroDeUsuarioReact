@@ -21,19 +21,22 @@ export default class CustomerAddress extends Component {
 
     save() {
         const address = this.state.address;
-        address.id = this.props.customer.adresses.length + 1;
-        this.props.pushAddress(address);
-        this.setState({ address: new Address() });
-        Array.from(document.querySelectorAll("input")).forEach(
-            input => (input.value = "")
-          );
+        console.log(address);
+        if (address.id) {
+            const i = address.id - 1;
+            this.props.customer.adresses[i] = address;
+        } else {
+            address.id = this.props.customer.adresses.length + 1;
+            this.props.pushAddress(address);
+        }
+        this.clear();
     }
 
     clear() {
         this.setState({ address: new Address() });
-        Array.from(document.querySelectorAll("input")).forEach(
+        Array.from(document.querySelectorAll("#address")).forEach(
             input => (input.value = "")
-          );
+        );
     }
 
     loadAddress(address) {
@@ -45,7 +48,7 @@ export default class CustomerAddress extends Component {
         console.log(adresses);
         return adresses.map((a, i) => {
             return (
-                <button onClick={() => this.loadAddress(a)}type="button" class="btn btn-light btn-small">{i + 1}</button>
+                <button onClick={() => this.loadAddress(a)} type="button" class="btn btn-light btn-small">{i + 1}</button>
             )
         });
     }
@@ -60,7 +63,7 @@ export default class CustomerAddress extends Component {
                     <div className="col-12 col-md-6">
                         <div className="form-group">
                             <label>Cidade</label>
-                            <input type="text" className="form-control"
+                            <input id="address" type="text" className="form-control"
                                 name="cidade"
                                 value={this.state.address.cidade}
                                 onChange={e => this.updateField(e)}
@@ -71,7 +74,7 @@ export default class CustomerAddress extends Component {
                     <div className="col-12 col-md-6">
                         <div className="form-group">
                             <label>Rua</label>
-                            <input type="text" className="form-control"
+                            <input id="address" type="text" className="form-control"
                                 name="rua"
                                 value={this.state.address.rua}
                                 onChange={e => this.updateField(e)}
