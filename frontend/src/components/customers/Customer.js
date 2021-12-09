@@ -3,7 +3,7 @@ export default class Customer {
         this.id = id;
         this.name = name;
         this.email = email;
-        this.addresses = [];
+        this.adresses = [];
 
     }
 }

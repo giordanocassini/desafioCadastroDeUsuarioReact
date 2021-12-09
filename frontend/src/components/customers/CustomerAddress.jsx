@@ -21,13 +21,19 @@ export default class CustomerAddress extends Component {
 
     save() {
         const address = this.state.address;
-        address.id = this.props.customer.addresses.length + 1;
+        address.id = this.props.customer.adresses.length + 1;
         this.props.pushAddress(address);
         this.setState({ address: new Address() });
+        Array.from(document.querySelectorAll("input")).forEach(
+            input => (input.value = "")
+          );
     }
 
     clear() {
         this.setState({ address: new Address() });
+        Array.from(document.querySelectorAll("input")).forEach(
+            input => (input.value = "")
+          );
     }
 
     loadAddress(address) {
@@ -35,9 +41,9 @@ export default class CustomerAddress extends Component {
     }
 
     renderAddressSelector() {
-        const addresses = this.props.customer.addresses;
-        console.log(addresses);
-        return addresses.map((a, i) => {
+        const adresses = this.props.customer.adresses;
+        console.log(adresses);
+        return adresses.map((a, i) => {
             return (
                 <button onClick={() => this.loadAddress(a)}type="button" class="btn btn-light btn-small">{i + 1}</button>
             )

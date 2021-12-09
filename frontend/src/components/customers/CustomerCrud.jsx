@@ -19,6 +19,12 @@ const initialState = {
 
 export default class CustomersCrud extends Component {
 
+    constructor(props) {
+        super(props)
+        this.save = this.save.bind(this);
+        this.clear = this.clear.bind(this);
+    }
+
     state = { ...initialState }
 
     componentWillMount() {
@@ -29,6 +35,9 @@ export default class CustomersCrud extends Component {
 
     clear() {
         this.setState({ customer: new Customer() });
+        Array.from(document.querySelectorAll("input")).forEach(
+            input => (input.value = "")
+          );
     }
 
     save() {
@@ -39,6 +48,9 @@ export default class CustomersCrud extends Component {
             .then(resp => {
                 const list = this.getUpdatedList(resp.data);
                 this.setState({ customer: new Customer(), list });
+                Array.from(document.querySelectorAll("input")).forEach(
+                    input => (input.value = "")
+                  );
             })
     }
 
@@ -67,7 +79,7 @@ export default class CustomersCrud extends Component {
 
     pushAddress(address) {
         const customer = this.state.customer;
-        customer.addresses.push(address);
+        customer.adresses.push(address);
         this.setState({ customer });
     }
    
@@ -101,7 +113,7 @@ export default class CustomersCrud extends Component {
                     <CustomerForm
                         customer={this.state.customer}
                         updateField={e => this.updateField(e)}
-                        salvar={e => this.save(e)}
+                        salvar={() => this.save()}
                         cancelar={() => this.clear()}
                         pushAddress= {a => this.pushAddress(a)}
                     />
