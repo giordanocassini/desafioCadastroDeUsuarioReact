@@ -7,6 +7,7 @@ export default class CustomerAddress extends Component {
         super(props);
         this.save = this.save.bind(this);
         this.clear = this.clear.bind(this);
+        this.remove = this.remove.bind(this);
         this.renderAddressSelector = this.renderAddressSelector.bind(this);
         this.loadAddress = this.loadAddress.bind(this);
     };
@@ -21,7 +22,6 @@ export default class CustomerAddress extends Component {
 
     save() {
         const address = this.state.address;
-        console.log(address);
         if (address.id) {
             const i = address.id - 1;
             this.props.customer.adresses[i] = address;
@@ -37,15 +37,22 @@ export default class CustomerAddress extends Component {
         Array.from(document.querySelectorAll("#address")).forEach(
             input => (input.value = "")
         );
+        document.getElementById('remove-address').style.display = 'none';
     }
 
     loadAddress(address) {
         this.setState({ address });
+        document.getElementById('remove-address').style.display = 'block';
+    }
+
+    remove() {
+        const address = this.state.address;
+        this.props.customer.adresses.splice(address.id - 1, 1);
+        this.clear();
     }
 
     renderAddressSelector() {
         const adresses = this.props.customer.adresses;
-        console.log(adresses);
         return adresses.map((a, i) => {
             return (
                 <button onClick={() => this.loadAddress(a)} type="button" class="btn btn-light btn-small">{i + 1}</button>
@@ -92,6 +99,11 @@ export default class CustomerAddress extends Component {
                         <button className="btn btn-secondary ml-2"
                             onClick={e => this.clear(e)}>
                             Cancelar
+                        </button>
+
+                        <button id = 'remove-address' className="btn btn-danger ml-2" style={{display: 'none'}}
+                            onClick={e => this.remove(e)}>
+                            Remover
                         </button>
                     </div>
                 </div>
