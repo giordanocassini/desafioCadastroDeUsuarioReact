@@ -23,6 +23,7 @@ export default class CustomersCrud extends Component {
         super(props)
         this.save = this.save.bind(this);
         this.clear = this.clear.bind(this);
+        this.toggleDisplay = this.toggleDisplay.bind(this);
     }
 
     state = { ...initialState }
@@ -37,7 +38,8 @@ export default class CustomersCrud extends Component {
         this.setState({ customer: new Customer() });
         Array.from(document.querySelectorAll("input")).forEach(
             input => (input.value = "")
-          );
+        );
+        this.toggleDisplay('customer-form');
     }
 
     save() {
@@ -50,8 +52,9 @@ export default class CustomersCrud extends Component {
                 this.setState({ customer: new Customer(), list });
                 Array.from(document.querySelectorAll("input")).forEach(
                     input => (input.value = "")
-                  );
+                );
             })
+        this.toggleDisplay('customer-form');
     }
 
     getUpdatedList(customer) {
@@ -68,6 +71,7 @@ export default class CustomersCrud extends Component {
 
     load(customer) {
         this.setState({ customer });
+        this.toggleDisplay('customer-form');
     }
 
     remove(customer) {
@@ -82,7 +86,7 @@ export default class CustomersCrud extends Component {
         customer.adresses.push(address);
         this.setState({ customer });
     }
-   
+
     renderRows() { /* refatorar */
         return this.state.list.map(customer => {
             return (
@@ -105,20 +109,36 @@ export default class CustomersCrud extends Component {
         })
     }
 
+    toggleDisplay(id) {
+        const e = document.getElementById(`${id}`)
+        const display = e.style.display === 'block';
+        if (display) {
+            e.style.display = 'none';
+        } else {
+            e.style.display = 'block';
+        }
+    }
+
+    newCustomer() {
+        this.setState({ customer: new Customer() });
+        this.toggleDisplay('customer-form');
+    }
+
 
 
     render() {
         return (
-                <Main {...headerProps}>
-                    <CustomerForm
-                        customer={this.state.customer}
-                        updateField={e => this.updateField(e)}
-                        salvar={() => this.save()}
-                        cancelar={() => this.clear()}
-                        pushAddress= {a => this.pushAddress(a)}
-                    />
-                    <CustomerTable rows={this.renderRows()}/>
-                </Main>
+            <Main {...headerProps}>
+                <CustomerForm
+                    customer={this.state.customer}
+                    updateField={e => this.updateField(e)}
+                    salvar={() => this.save()}
+                    cancelar={() => this.clear()}
+                    pushAddress={a => this.pushAddress(a)}
+                    newCustomer={() => this.newCustomer()}
+                />
+                <CustomerTable rows={this.renderRows()} />
+            </Main>
         )
     }
 }

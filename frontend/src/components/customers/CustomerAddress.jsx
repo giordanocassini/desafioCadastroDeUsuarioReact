@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Address from "./Address";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default class CustomerAddress extends Component {
 
@@ -101,7 +102,7 @@ export default class CustomerAddress extends Component {
                             Cancelar
                         </button>
 
-                        <button id = 'remove-address' className="btn btn-danger ml-2" style={{display: 'none'}}
+                        <button id='remove-address' className="btn btn-danger ml-2" style={{ display: 'none' }}
                             onClick={e => this.remove(e)}>
                             Remover
                         </button>

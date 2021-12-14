@@ -3,7 +3,10 @@ import CustomerAddress from "./CustomerAddress";
 
 export default props =>
     <React.Fragment>
-        <div className="form">
+        <button id='new-customer' className="btn btn-success mb-3" onClick={props.newCustomer}>
+            Novo Cliente
+        </button>
+        <div className="form" style={{ display: 'none' }} id="customer-form">
             <div className="row">
                 <div className="col-12 col-md-6">
                     <div className="form-group">
