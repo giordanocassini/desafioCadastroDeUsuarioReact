@@ -23,7 +23,8 @@ export default class CustomersCrud extends Component {
         super(props)
         this.save = this.save.bind(this);
         this.clear = this.clear.bind(this);
-        this.toggleDisplay = this.toggleDisplay.bind(this);
+        this.displayBlock = this.displayBlock.bind(this);
+        this.displayNone = this.displayNone.bind(this);
     }
 
     state = { ...initialState }
@@ -39,7 +40,8 @@ export default class CustomersCrud extends Component {
         Array.from(document.querySelectorAll("input")).forEach(
             input => (input.value = "")
         );
-        this.toggleDisplay('customer-form');
+        this.displayNone('customer-form');
+        this.displayBlock('new-customer');
     }
 
     save() {
@@ -54,7 +56,8 @@ export default class CustomersCrud extends Component {
                     input => (input.value = "")
                 );
             })
-        this.toggleDisplay('customer-form');
+        this.displayNone('customer-form');
+        this.displayBlock('new-customer');
     }
 
     getUpdatedList(customer) {
@@ -70,8 +73,10 @@ export default class CustomersCrud extends Component {
     }
 
     load(customer) {
+        this.clear();
         this.setState({ customer });
-        this.toggleDisplay('customer-form');
+        this.displayBlock('customer-form');
+        this.displayNone('new-customer');
     }
 
     remove(customer) {
@@ -85,6 +90,32 @@ export default class CustomersCrud extends Component {
         const customer = this.state.customer;
         customer.adresses.push(address);
         this.setState({ customer });
+    }
+
+    // toggleDisplay(id) {
+    //     const e = document.getElementById(`${id}`)
+    //     const display = e.style.display === 'block';
+    //     if (display) {
+    //         e.style.display = 'none';
+    //     } else {
+    //         e.style.display = 'block';
+    //     }
+    // }
+
+    displayBlock(id) {
+        const e = document.getElementById(`${id}`)
+        e.style.display = 'block';
+    }
+
+    displayNone(id) {
+        const e = document.getElementById(`${id}`)
+        e.style.display = 'none';
+    }
+
+    newCustomer() {
+        this.setState({ customer: new Customer() });
+        this.displayBlock('customer-form');
+        this.displayNone('new-customer');
     }
 
     renderRows() { /* refatorar */
@@ -109,21 +140,6 @@ export default class CustomersCrud extends Component {
         })
     }
 
-    toggleDisplay(id) {
-        const e = document.getElementById(`${id}`)
-        const display = e.style.display === 'block';
-        if (display) {
-            e.style.display = 'none';
-        } else {
-            e.style.display = 'block';
-        }
-    }
-
-    newCustomer() {
-        this.setState({ customer: new Customer() });
-        this.toggleDisplay('customer-form');
-    }
-
 
 
     render() {
@@ -136,6 +152,8 @@ export default class CustomersCrud extends Component {
                     cancelar={() => this.clear()}
                     pushAddress={a => this.pushAddress(a)}
                     newCustomer={() => this.newCustomer()}
+                    displayBlock={id => this.displayBlock(id)}
+                    displayNone={id => this.displayNone(id)}
                 />
                 <CustomerTable rows={this.renderRows()} />
             </Main>

@@ -32,7 +32,7 @@ export default props =>
             </div>
             <hr />
             <CustomerAddress {...props} />
-            <div className="row">
+            <div id='customer-form-buttons' className="row">
                 <div className="col-12 d-flex justify-content-end">
                     <button className="btn btn-primary"
                         onClick={props.salvar}>
