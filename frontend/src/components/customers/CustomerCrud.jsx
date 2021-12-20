@@ -6,9 +6,9 @@ import CustomerTable from "./CustomerTable";
 import Customer from "./Customer";
 
 const headerProps = {
-    icon: 'user',
+    icon: 'users',
     title: 'Clientes',
-    subtitle: 'Cadastro de usuários: Incluir, Listar, Alterar e Excluir!'
+    subtitle: 'Cadastro de Clientes: Incluir, Listar, Alterar e Excluir!'
 }
 
 const baseUrl = 'http://localhost:3001/customers'
