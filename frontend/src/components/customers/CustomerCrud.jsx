@@ -92,16 +92,6 @@ export default class CustomersCrud extends Component {
         this.setState({ customer });
     }
 
-    // toggleDisplay(id) {
-    //     const e = document.getElementById(`${id}`)
-    //     const display = e.style.display === 'block';
-    //     if (display) {
-    //         e.style.display = 'none';
-    //     } else {
-    //         e.style.display = 'block';
-    //     }
-    // }
-
     displayBlock(id) {
         const e = document.getElementById(`${id}`)
         e.style.display = 'block';
@@ -118,7 +108,8 @@ export default class CustomersCrud extends Component {
         this.displayNone('new-customer');
     }
 
-    renderRows() { /* refatorar */
+    renderRows() { /* refatorar... Ainda não descobri como jogar essa função dentro do componente CustomerTable
+                                   sem precisar criar um componente de classe*/
         return this.state.list.map(customer => {
             return (
                 <tr key={customer.id}>
