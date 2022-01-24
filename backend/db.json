@@ -1,16 +1,30 @@
 {
   "customers": [
     {
-      "name": "giordano cassini",
-      "email": "giordano.cassini@gmail.com",
-      "addresses": [
+      "name": "Danieleia",
+      "email": "dani@gmail.com",
+      "adresses": [
         {
           "id": 1,
-          "cidade": "flonaps",
-          "rua": "rua"
+          "cidade": "Juarez do sul",
+          "rua": "abalo"
         }
       ],
       "id": 1
+    },
+    {
+      "name": "Giordano Cerutti Cassini",
+      "email": "giordano.cassini@gmail.com",
+      "adresses": [
+        {
+          "id": 1,
+          "cidade": "Florianópolis",
+          "rua": "fgn"
+        }
+      ],
+      "id": 2
     }
-  ]
+  ],
+
+  "users":[]
 }

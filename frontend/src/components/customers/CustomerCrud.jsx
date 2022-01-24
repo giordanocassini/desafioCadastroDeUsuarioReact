@@ -72,7 +72,7 @@ export default class CustomersCrud extends Component {
         this.setState({ customer });
     }
 
-    load(customer) {
+    load(customer) {                                         
         this.clear();
         this.setState({ customer });
         this.displayBlock('customer-form');
@@ -84,6 +84,7 @@ export default class CustomersCrud extends Component {
             const list = this.state.list.filter(u => u !== customer);
             this.setState({ list });
         })
+        this.clear();
     }
 
     pushAddress(address) {

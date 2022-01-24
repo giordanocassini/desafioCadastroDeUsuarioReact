@@ -4,9 +4,11 @@ import Main from "../template/Main"
 export default props =>
     <Main icon="home" title="Início"
         subtitle="Em desenvolvimento...">
-        <div className='display-4'>Bem Vindo!</div>
+        <h2>Login:</h2>
         <hr />
-        <p className="mb-0">Projeto para treinar minhas habilidades em React Js. Controle de usuário em breve!</p>
+        <input type="text" name="login" />
+        <input type="password" name="password" />
+        <input type="submit" name="submit" />
         
 
     </Main>
