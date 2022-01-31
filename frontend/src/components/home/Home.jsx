@@ -1,14 +1,9 @@
 import React from "react";
-import Main from "../template/Main"
+import Main from "../template/Main";
+import Login from "../users/Login";
 
 export default props =>
     <Main icon="home" title="Início"
         subtitle="Em desenvolvimento...">
-        <h2>Login:</h2>
-        <hr />
-        <input type="text" name="login" />
-        <input type="password" name="password" />
-        <input type="submit" name="submit" />
-        
-
+        <Login/>      
     </Main>
