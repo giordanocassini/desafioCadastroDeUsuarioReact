@@ -17,7 +17,12 @@ const initialState = {
     list: []
 }
 
+
+
 export default class CustomersCrud extends Component {
+
+    static contextType = AuthContext;
+   
 
     constructor(props) {
         super(props)
@@ -31,8 +36,10 @@ export default class CustomersCrud extends Component {
 
     componentWillMount() {
         axios(baseUrl).then(resp => {
-            this.setState({ list: resp.data })
+            this.setState({ list: resp.data });
         })
+        const  { auth } = this.context;
+        console.log(auth?.user);
     }
 
     clear() {
@@ -111,6 +118,7 @@ export default class CustomersCrud extends Component {
 
     renderRows() { /* refatorar... Ainda não descobri como jogar essa função dentro do componente CustomerTable
                                    sem precisar criar um componente de classe*/
+                                 
         return this.state.list.map(customer => {
             return (
                 <tr key={customer.id}>
@@ -135,6 +143,7 @@ export default class CustomersCrud extends Component {
 
 
     render() {
+        
         return (
             <Main {...headerProps}>
                 <CustomerForm

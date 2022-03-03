@@ -1,0 +1,3 @@
+20220215	19:15:14	bb2cdef2-1962-4404-a2a2-ca06a1b832bf	ReferenceError: userDB is not defined
+20220222	18:01:26	46d9c342-1ac4-42f6-a7c0-3354b7e6fe07	Error: Not allowed by CORS
+20220222	18:07:30	0af153f4-500c-47c0-817d-a7c0f75cbc3f	Error: Not allowed by CORS

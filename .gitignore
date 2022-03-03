@@ -1,1 +1,3 @@
 backend/db.json
+backend/node_modules
+backend/.env
