@@ -19,10 +19,7 @@ const initialState = {
 
 
 
-export default class CustomersCrud extends Component {
-
-    static contextType = AuthContext;
-   
+export default class CustomersCrud extends Component {  
 
     constructor(props) {
         super(props)
@@ -38,8 +35,6 @@ export default class CustomersCrud extends Component {
         axios(baseUrl).then(resp => {
             this.setState({ list: resp.data });
         })
-        const  { auth } = this.context;
-        console.log(auth?.user);
     }
 
     clear() {
