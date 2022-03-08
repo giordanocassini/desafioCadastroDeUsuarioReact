@@ -1,9 +1,14 @@
 {
   "customers": [
     {
-      "name": "Danieleia",
-      "email": "dani@gmail.com",
-      "adresses": [],
+      "name": "Waterfall SurfShop",
+      "email": "giordano.cassini@gmail.com",
+      "adresses": [
+        {
+          "id": 1,
+          "cidade": "Florianópolis"
+        }
+      ],
       "id": 1
     },
     {
@@ -18,6 +23,5 @@
       ],
       "id": 2
     }
-  ],
-  "users": []
+  ]
 }

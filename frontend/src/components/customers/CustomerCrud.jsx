@@ -3,7 +3,7 @@ import axios from "axios";
 import Main from "../template/Main";
 import CustomerForm from "./CustomerForm";
 import CustomerTable from "./CustomerTable";
-import Customer from "./Customer";
+import Customer from "./models/Customer";
 
 const headerProps = {
     icon: 'users',

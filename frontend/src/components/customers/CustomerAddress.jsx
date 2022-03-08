@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Address from "./Address";
+import Address from "./models/Address";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default class CustomerAddress extends Component {
