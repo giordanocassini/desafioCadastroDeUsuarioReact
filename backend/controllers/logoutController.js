@@ -10,12 +10,14 @@ const handleLogout = async (req, res) => {
 
     const cookies = req.cookies;
     if (!cookies?.jwt) return res.sendStatus(204); //No content
+    console.log('pass through first step');
     const refreshToken = cookies.jwt;
 
     // Is refreshToken in db?
     const foundUser = usersDB.users.find(person => person.refreshToken === refreshToken);
     if (!foundUser) {
         res.clearCookie('jwt', { httpOnly: true });
+        console.log('pass through second step');
         return res.sendStatus(204);
     }
 
@@ -30,6 +32,7 @@ const handleLogout = async (req, res) => {
 
     res.clearCookie('jwt', { httpOnly: true, sameSite: 'None'}); //secure: true - only serves https (for production only)
     res.sendStatus(204);
+    console.log('pass through tird step');
 }
 
 module.exports = { handleLogout }

@@ -1,5 +1,6 @@
 import './Header.css';
 import React from 'react';
+import UserMenu from '../users/UserMenu';
 
 export default props => 
     <header className="header d-none d-sm-flex flex-column">
@@ -10,4 +11,5 @@ export default props =>
         <p className="lead text-muted">
             {props.subtitle}
         </p>
+        <UserMenu />
     </header>
