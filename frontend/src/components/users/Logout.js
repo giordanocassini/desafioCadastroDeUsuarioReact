@@ -13,7 +13,7 @@ const Logout = () => {
 
     const clickLogout = (e) => {
         try {
-            const response = axios.get('/logout',
+            const response = axios.get(LOGOUT_URL,
                 {
                     headers: { 'Content-Type': 'application/json' },
                     withCredentials: true
