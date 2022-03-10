@@ -11,15 +11,15 @@ const Logout = () => {
     const navigate = useNavigate();
     const errRef = useRef();
 
-    const clickLogout = async (e) => {
+    const clickLogout = (e) => {
         try {
-            const response = await axios.get(LOGOUT_URL,
+            const response = axios.get('/logout',
                 {
                     headers: { 'Content-Type': 'application/json' },
                     withCredentials: true
                 });
             console.log(JSON.stringify(response?.data));
-            setAuth('');
+            setAuth({});
             navigate('/', { replace: true });
         } catch (err) {
             if (!err?.response) {
