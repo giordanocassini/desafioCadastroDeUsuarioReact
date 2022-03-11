@@ -1,7 +1,7 @@
 import useAuth from './hooks/useAuth';
 import { useRef, useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import axios from './api/axios';
+import axios from '../api/axios';
 const LOGOUT_URL = '/logout';
 
 const Logout = () => {

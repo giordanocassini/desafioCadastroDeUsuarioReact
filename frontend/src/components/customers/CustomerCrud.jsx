@@ -4,6 +4,7 @@ import Main from "../template/Main";
 import CustomerForm from "./CustomerForm";
 import CustomerTable from "./CustomerTable";
 import Customer from "./models/Customer";
+import EmployeesTest from "./EmployeesTest";
 
 const headerProps = {
     icon: 'users',
@@ -152,6 +153,7 @@ export default class CustomersCrud extends Component {
                     displayNone={id => this.displayNone(id)}
                 />
                 <CustomerTable rows={this.renderRows()} />
+                <EmployeesTest />
             </Main>
         )
     }
