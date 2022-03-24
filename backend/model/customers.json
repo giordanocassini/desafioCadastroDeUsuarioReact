@@ -1,0 +1,37 @@
+[
+  {
+    "name": "Waterfall SurfShop",
+    "email": "giordano.cassini@gmail.com",
+    "adresses": [
+      {
+        "id": 1,
+        "cidade": "Florianópolis"
+      }
+    ],
+    "id": 1
+  },
+  {
+    "name": "Giordano Cerutti Cassini",
+    "email": "giordano.cassini@gmail.com",
+    "adresses": [
+      {
+        "id": 1,
+        "cidade": "Florianópolis",
+        "rua": "fgn"
+      }
+    ],
+    "id": 2
+  },
+  {
+    "name": "bob",
+    "email": "bob@gmail.com",
+    "adresses": [
+      {
+        "id": 1,
+        "cidade": "haolelandia",
+        "rua": "rua dos haole"
+      }
+    ],
+    "id": 3
+  }
+]
