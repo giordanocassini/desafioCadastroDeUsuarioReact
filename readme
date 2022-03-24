@@ -1,1 +1,4 @@
-Para rodar o projeto é necessario rodar os comandos "npm i"  e "npm start" dentro das pastas "backend" e "frontend" respectivamente.
+Para rodar o projeto é necessario rodar o comandos 
+"npm i" dentro das pastas "backend" e "frontend" respectivamente.
+Em seguinda, "npm run dev" no backend e "npm start" no frontend.
+
