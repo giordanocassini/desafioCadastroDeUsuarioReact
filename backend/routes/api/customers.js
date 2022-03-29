@@ -5,10 +5,10 @@ const customersController = require('../../controllers/customersController');
 router.route('/')
     .get(customersController.getAllCustomers)
     .post(customersController.createNewCustomer)
-    .put(customersController.updateCustomer)
-    .delete(customersController.deleteCustomer);
 
 router.route('/:id')
-    .get(customersController.getCustomer);
+    .get(customersController.getCustomer)
+    .delete(customersController.deleteCustomer)
+    .put(customersController.updateCustomer)
 
 module.exports = router;

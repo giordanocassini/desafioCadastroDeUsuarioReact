@@ -4,6 +4,7 @@ import Main from "../template/Main";
 import CustomerForm from "./CustomerForm";
 import CustomerTable from "./CustomerTable";
 import Customer from "./models/Customer";
+import {parse, stringify} from 'flatted';
 
 const headerProps = {
     icon: 'users',
@@ -35,22 +36,6 @@ const CustomerCrud = () => {
         getCustomers();
     }, [])
 
-    // constructor(props) {
-    //     super(props)
-    //     this.save = this.save.bind(this);
-    //     this.clear = this.clear.bind(this);
-    //     this.displayBlock = this.displayBlock.bind(this);
-    //     this.displayNone = this.displayNone.bind(this);
-    // }
-
-    // state = { ...initialState }
-
-    // componentWillMount() {
-    //     axios(baseUrl).then(resp => {
-    //         this.setState({ list: resp.data });
-    //     })
-    // }
-
     const clear = () => {
         setCustomer(new Customer());
         Array.from(document.querySelectorAll("input")).forEach(
@@ -64,8 +49,20 @@ const CustomerCrud = () => {
         const newCustomer = customer;
         const method = newCustomer.id ? 'put' : 'post';
         const url = newCustomer.id ? `${baseUrl}/${newCustomer.id}` : baseUrl;
+        const addresses = stringify(newCustomer.addresses);
+        console.log(typeof addresses);
+        console.log(addresses);
         try {
-            const response = await axiosPrivate[method](url, newCustomer);
+            const response = await axiosPrivate[method](url, {
+                data: {
+                    id: newCustomer.id,
+                    name: newCustomer.name,
+                    email: newCustomer.email,
+                    adresses: addresses
+                }
+            });
+
+            console.log(typeof response.data)
             const newList = getUpdatedList(response.data);
             //this.setState({ customer: new Customer(), list });
             setCustomer(new Customer());
@@ -73,7 +70,7 @@ const CustomerCrud = () => {
             Array.from(document.querySelectorAll("input")).forEach(
                 input => (input.value = "")
             );
-            console.log(response);
+            console.log(response.data);
             displayNone('customer-form');
             displayBlock('new-customer');
         } catch (err) {
@@ -106,7 +103,10 @@ const CustomerCrud = () => {
 
         try {
             const response = await axiosPrivate.delete(`${baseUrl}/${currentCustomer.id}`, {
-                signal: controller.signal
+                signal: controller.signal,
+                data: {
+                    id: currentCustomer.id
+                }
             });
             const newList = list.filter(u => u !== currentCustomer);
             setList(newList);
